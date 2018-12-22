@@ -37,15 +37,6 @@
             ],
             "playbook_dir": "packer-build"        
         }
-    ],
-    "artifacts": [
-        {
-            "files": [
-                "ami_builder_event.json",
-                "build.log"
-            ],
-            "discard-paths": "yes"
-        }
     ]
 
 }

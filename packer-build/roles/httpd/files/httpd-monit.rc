@@ -1,0 +1,20 @@
+check process httpd with pidfile /etc/httpd/run/httpd.pid
+   group root
+   start program = "/etc/init.d/httpd start"
+   stop  program = "/etc/init.d/httpd stop"
+   depends on apache_bin
+   depends on apache_rc
+
+ check file apache_bin with path /usr/sbin/httpd
+   group root
+   if failed checksum then unmonitor
+   if failed permission 755 then unmonitor
+   if failed uid root then unmonitor
+   if failed gid root then unmonitor
+
+ check file apache_rc with path /etc/init.d/httpd
+   group root
+   if failed checksum then unmonitor
+   if failed permission 755 then unmonitor
+   if failed uid root then unmonitor
+   if failed gid root then unmonitor

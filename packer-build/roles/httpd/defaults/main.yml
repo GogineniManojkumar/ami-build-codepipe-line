@@ -1,0 +1,8 @@
+---
+# defaults file for apache
+http_port: 80
+http_server_name: localhost
+client_name: specom
+http_logs_dir: /var/log/httpd
+http_document_root: /var/www/html
+http_conf_dir: /etc/httpd/conf.d

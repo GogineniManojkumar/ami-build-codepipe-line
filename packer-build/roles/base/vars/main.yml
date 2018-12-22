@@ -1,0 +1,9 @@
+---
+# vars file for base
+
+partitions:
+ - device: /dev/sdb
+   mount_point: /spdata
+   
+packages: 
+ - name: [ git, monit, mailx ]

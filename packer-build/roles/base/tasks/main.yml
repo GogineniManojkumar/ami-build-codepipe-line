@@ -1,0 +1,4 @@
+---
+# tasks file for base
+- name: install all updates
+  yum: name=* state=latest

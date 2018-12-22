@@ -1,0 +1,23 @@
+---
+# tasks file for apache
+- name: install httpd
+  yum: name={{ item }} state=present
+  with_items:
+   - httpd24
+   - httpd24-tools
+  notify: restart httpd
+  
+- name: enable httpd service  
+  service: name=httpd enabled=yes
+
+- name: remove unused conf files
+  file: path=/etc/httpd/conf.d/{{ item }} state=absent
+  with_items:
+    - autoindex.conf
+    - userdir.conf
+    - welcome.conf 
+- name: copy index.html to docroot
+  copy: 
+    src: index.html
+    dest: /var/www/html/index.html
+  notify: restart httpd

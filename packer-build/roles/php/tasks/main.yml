@@ -1,0 +1,25 @@
+---
+# tasks file for php
+- name: install "{{ php_version }}"
+  yum: name={{ item }} state=present
+  with_items:
+   - "{{ php_version }}"
+   - "{{ php_version }}-common"
+   - "{{ php_version }}-mcrypt"
+   - "{{ php_version }}-intl"
+   - "{{ php_version }}-cli"
+   - "{{ php_version }}-gd"
+   - "{{ php_version }}-opcache"
+   - "{{ php_version }}-pecl-redis"
+   - "{{ php_version }}-bcmath"
+   - "{{ php_version }}-mbstring"
+   - "{{ php_version }}-pdo"
+   - "{{ php_version }}-mysqlnd"
+   - "{{ php_version }}-pecl-igbinary"
+   - "{{ php_version }}-pecl-jsonc"
+   - "{{ php_version }}-pecl-oauth"
+   - "{{ php_version }}-process"
+   - "{{ php_version }}-soap"
+   - "{{ php_version }}-xml"
+   - php-pear
+

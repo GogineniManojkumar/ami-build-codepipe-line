@@ -1,0 +1,26 @@
+<VirtualHost *:{{http_port}}>
+    ServerName {{http_server_name}}
+    UseCanonicalName Off
+
+    SetEnvIf X-Forwarded-For "^.*\..*\..*\..*" forwarded
+    LogFormat "%{X-Forwarded-For}i %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" proxy
+
+    ErrorLog  {{http_logs_dir}}/{{client_name}}_http_error.log
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+    CustomLog  {{http_logs_dir}}/{{client_name}}_http_access.log combined env=!forwarded
+    CustomLog  {{http_logs_dir}}/{{client_name}}_http_access.log proxy env=forwarded
+
+    RewriteEngine On
+
+    SetEnvIf X-Forwarded-Proto https HTTPS=on
+    SetEnvIf X-Forwarded-Proto https SERVER_PORT=443
+
+    DocumentRoot "{{http_document_root}}"
+    <Directory "{{http_document_root}}">
+        Require all granted
+        AllowOverride All
+    </Directory>
+
+</VirtualHost>

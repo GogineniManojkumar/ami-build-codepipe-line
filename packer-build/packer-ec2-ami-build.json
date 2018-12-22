@@ -2,7 +2,6 @@
     "builders" : [
         {
             "type": "amazon-ebs",
-            "profile": "arun",
             "region": "ap-south-1",
             "instance_type": "t2.micro",
             "ssh_username": "ec2-user",

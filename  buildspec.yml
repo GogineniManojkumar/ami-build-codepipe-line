@@ -14,7 +14,7 @@ phases:
   pre_build:
     commands:
       - echo "Validating packer-ec2-ami-build.json"
-      - ./packer validate packer-ec2-ami-build.json
+      - ./packer validate packer-build/packer-ec2-ami-build.json
     finally: 
       - echo " Packer script Validation Completed"
   build:
@@ -29,7 +29,7 @@ phases:
       - aws configure set aws_secret_access_key `./jq -r '.SecretAccessKey' aws_credentials.json`
       - aws configure set aws_session_token `./jq -r '.Token' aws_credentials.json`
       - echo "Building HashiCorp Packer template, amazon-linux_packer-template.json"
-      - ./packer build packer-ec2-ami-build.json
+      - ./packer build packer-build/packer-ec2-ami-build.json
   post_build:
     commands:
       - echo "AMI build completed on `date`"

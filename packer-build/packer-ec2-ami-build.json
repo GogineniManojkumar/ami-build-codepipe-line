@@ -25,7 +25,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "script": "wp-deploy.sh",
+            "script": "packer-build/wp-deploy.sh",
             "pause_before": "10s"
         }
     ]

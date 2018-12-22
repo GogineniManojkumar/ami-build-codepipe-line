@@ -1,12 +1,20 @@
 {
+    "variables": {
+        "vpc": "{{env `BUILD_VPC_ID`}}",
+        "subnet": "{{env `BUILD_SUBNET_ID`}}",
+        "instance_type": "{{env `BUILD_INSTANCE_TYPE`}}",
+        "ami_name": "{{env `AMI_NAME`}}"
+      },
     "builders" : [
         {
             "type": "amazon-ebs",
             "region": "ap-south-1",
-            "instance_type": "t2.micro",
+            "instance_type": "{{user `instance_type`}}",
             "ssh_username": "ec2-user",
-            "ami_name": "wordpress_ami_{{timestamp}}",
+            "ami_name": "{{user `ami_name`}}_{{timestamp}}",
             "ami_description": "Image build by packer",
+            "vpc_id": "{{user `vpc` }}",
+            "subnet_id": "{{user `subnet` }}",
             "source_ami_filter": {
                 "filters": {
                     "virtualization-type": "hvm",
@@ -17,16 +25,18 @@
                 "most_recent": true
             },
             "tags": {
-                "Name": "AMI BUILD INSTANCE"
+                "Name": "{{user `ami_name`}}"
             }
         }   
     ],
     "provisioners": [
         {
             "type": "shell",
-            "script": "packer-build/anisble_install.sh",
-            "pause_before": "5s"
-          },
+            "inline": [
+                "sudo yum install python-pip -y",
+                "sudo pip install ansible"
+            ]
+        }, 
         {
             "type": "ansible-local",
             "playbook_file": "packer-build/server-setup.yml",
@@ -36,7 +46,13 @@
                 "packer-build/roles/php"
             ],
             "playbook_dir": "packer-build"        
-        }
+        },
+        {
+            "type": "shell",
+            "inline": [
+              "rm .ssh/authorized_keys ; sudo rm /root/.ssh/authorized_keys"
+            ]
+          }
     ]
 
 }

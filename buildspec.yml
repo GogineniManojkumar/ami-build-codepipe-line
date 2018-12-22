@@ -8,7 +8,6 @@ phases:
       - echo "Installing jq..."
       - curl -qL -o jq https://stedolan.github.io/jq/download/linux64/jq && chmod +x ./jq
     finally:
-      - ./packer --help
       - echo "Installed Packer and jq commands"
   pre_build:
     commands:

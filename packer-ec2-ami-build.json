@@ -2,7 +2,7 @@
     "builders" : [
         {
             "type": "amazon-ebs",
-            "profile": "aws-local",
+            "profile": "arun",
             "region": "ap-south-1",
             "instance_type": "t2.micro",
             "ssh_username": "ec2-user",
@@ -16,6 +16,9 @@
                 },
                 "owners": "amazon",
                 "most_recent": true
+            },
+            "tags": {
+                "Name": "AMI BUILD INSTANCE"
             }
         }   
     ],

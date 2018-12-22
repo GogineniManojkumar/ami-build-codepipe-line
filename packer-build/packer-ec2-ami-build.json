@@ -24,7 +24,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "script": "anisble_install.sh",
+            "script": "packer-build/anisble_install.sh",
             "pause_before": "5s"
           },
         {

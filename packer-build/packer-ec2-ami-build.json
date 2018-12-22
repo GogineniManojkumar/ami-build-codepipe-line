@@ -23,8 +23,14 @@
     ],
     "provisioners": [
         {
+            "type": "shell",
+            "script": "anisble_install.sh",
+            "pause_before": "5s"
+          },
+        {
             "type": "ansible-local",
-            "playbook_file": "packer-build/server-setup.yml"
+            "playbook_file": "packer-build/server-setup.yml",
+            "pause_before": "5s"
           }
     ]
 

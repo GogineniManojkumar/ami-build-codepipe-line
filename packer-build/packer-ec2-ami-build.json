@@ -30,8 +30,13 @@
         {
             "type": "ansible-local",
             "playbook_file": "packer-build/server-setup.yml",
-            "pause_before": "5s"
-          }
+            "role_paths": [
+                "packer-build/roles/base",
+                "packer-build/roles/httpd",
+                "packer-build/roles/php"
+            ],
+            "playbook_dir": "packer-build"        
+        }
     ]
 
 }

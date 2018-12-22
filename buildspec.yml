@@ -2,10 +2,11 @@
 version: 0.2
 env:
   variables:
-    BUILD_VPC_ID: "vpc-8ca988e4"
-    BUILD_SUBNET_ID: "subnet-07ce714b"
     BUILD_INSTANCE_TYPE: "t2.micro"
     AMI_NAME: "my_test_ami"
+  parameter-store:
+    BUILD_VPC_ID: "VPC_ID"
+    BUILD_SUBNET_ID: "SUBNET_ID"
 phases:
   install:
     commands:

@@ -32,6 +32,8 @@ phases:
       - aws configure set aws_session_token `./jq -r '.Token' aws_credentials.json`
       - echo "Building HashiCorp Packer template, amazon-linux_packer-template.json"
       - ./packer build packer-build/packer-ec2-ami-build.json | tee ami_build.log
+    finally:
+      - echo "AMI Creation Comepleted With Packer Script"
   post_build:
     commands:
       - echo "AMI build completed on `date`"

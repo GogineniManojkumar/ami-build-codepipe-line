@@ -14,8 +14,10 @@
     state: latest
 - name: Download codedeploy install script
   command: wget https://aws-codedeploy-ap-south-1.s3.amazonaws.com/latest/install
+- name: change permissions of install script
+  command: chmod +x install
 - name: install the code deploy agent
-  command: /bin/bash -x install auto
+  command: ./install auto
 - name: enable code deploy on boot
   service: 
     name: codedeploy-agent
